@@ -1,0 +1,255 @@
+
+
+<!DocType HTML>
+<HEAD>
+
+<TITLE>QueryMan - Visual Query Manager</TITLE>
+
+<META NAME="GENERATOR" Content="Microsoft Visual Studio">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<meta name=vs_targetSchema content="HTML 4.0">
+	
+	<link href="css/ui.css" rel="stylesheet">
+	<link href="css/tree.css" rel="stylesheet">
+	<link href="css/blue.css" rel=stylesheet>
+	<script src="js/jq.js"></script>
+	<script src="js/ui.js"></script>
+	<script src="js/rm.js"></script>
+	<script src="js/tree.js"></script>
+	<script src="js/squel.min.js"></script>
+	<script src="js/icheck.min.js"></script>
+	<script src="js/cm.js"></script>
+	
+
+</HEAD>
+<body style="background: #ced9e7;border: 1px solid 99bce8">
+	
+	<div class="MainFrame">
+		
+		<div class="toolbar">
+			<div class="toolbarinner">
+				<img src="css/images/import.jpg" height="24" width="24" align="absmiddle" style="margin-left: 3px">
+				<span style="padding-left: 4px;">Graphical Query Builder</span>
+				
+				<div style="float: right; margin-right: 50px;  display: inline; margin-right: 2px;">
+					<button id="doNewTable" style="background: none;padding: 2px 2px 2px 2px;margin-top: -1px;border: none;">
+						<img src="css/images/derived.png" height= "16" width="16" align=absbottom style=";margin-top: -8px; margin-right: -2px;">
+						<span style="">Add/Create Table</span>
+						
+					</button>
+					<button id="qProps" style="background: none;padding: 2px 2px 2px 2px;margin-top: -1px;border: none;">
+						<img src="css/images/props.jpg" height= "16" width="16" align=absbottom style=";margin-top: -8px; margin-right: -2px;">
+						<span style="">Query Properties</span>
+						
+					</button>
+					<button id="runQ" style="background: none;padding: 2px 2px 2px 2px;margin-top: -1px;border: none;">
+						<img src="css/images/run.png" height= "16" width="16" align=absbottom>
+						<span style="">Run</span>
+						
+					</button>
+					<button id="saveQ" style="background: none;padding: 2px 2px 2px 2px;margin-top: -1px;border: none;">
+						<img src="css/images/icon-save.gif" height= "16" width="16" align=absbottom>
+						<span style="">Save</span>
+						
+					</button>
+					<button id="loadQ" style="background: none;padding: 2px 2px 2px 2px;margin-top: -1px;border: none;">
+						<img src="css/images/plus.png" height= "16" width="16" align=absbottom>
+						<span style="">Load</span>
+						
+					</button>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="frame2" style="height: 350px;">
+			<div id="newTable" class='newTableDef'>		
+				<img style="position: absolute; right: 14px; top: 14px; cursor: hand; cursor: pointer" src="css/images/cross.png" height=16 width=16 id='closeNewTable'>
+				<table id='newTableDetails'>
+					<caption>New Table Details</caption>
+					<tr>
+						<th>Properties</th>
+						<th>Values</th>
+					</tr>
+					<tr>
+						<td>New Table Name</td>
+						<td><input type="text" id="newtableName" title="New Table Name" size="6"></td>
+					</tr>
+					<tr>
+						<td>New Table Alias</td>
+						<td><input type="text" id="newtableAlias" title="New Table Alias" size="6"></td>
+					</tr>
+					<tr>
+						<td>No Fallback</td>
+						<td><input type="checkbox" id="newtableFallback" checked=true></td>
+					</tr>
+					<tr>
+						<td colspan=2><input type="button" id="createnewTable" value="Create New Table"></td>
+					</tr>
+				</table>
+			
+		</div>	
+			
+			<div class="leftContainer">
+				
+				<div class="TreeHeader">Select Tables<img src="css/images/table.png" height="16" width="16" align="top" style="margin-top: 3px;margin-left: 3px; background: transparent "></div>
+				
+				<div class='fieldFinder'><span style='font-size: 12px'>Search: </span><input type="text" size="20" id='findField' style='border: 1px solid #d0d0d0; color: #747374'><img src='css/images/dbs.png' height=16 width=16 align=absmiddle style='margin-left:-16px'></div>
+				<div class="content">
+					
+				</div>
+				
+			
+			</div>
+			
+			<div class="container" id="mainContainer">
+				
+				<div id="msgHolder" class='ui-state-error' style="z-index: -1; display: none"></div>
+					
+				<div id="tabs">
+					<ul>
+						<li><a href="#designer"><img src="css/images/desi.gif" width="16" height="16" style="margin-right: 3px;" align="top">Design View</a></li>
+						<li><a href="#queryView"><img src="css/images/sql.png" width="16" height="16" style="margin-right: 3px; " align="top">SQL View</a></li>		
+					</ul>
+					
+					<div id="designer">
+						
+						
+						
+						<div id="drawing"></div>
+					</div>	
+					<div id="queryView">
+						<div style="color:#04468c; font-size: 14px; font-family: consolas"> <strong>Sql</strong> Output Window</div>
+					</div>
+				</div>	
+				
+			</div>
+			
+		</div>
+		
+		
+		
+		<div class="frame2" style="height: 200px" id="gridView">
+			<table class="gridTable" >
+				<tbody>
+					<tr>
+						<th width=10%>Output</th>
+						<th width=10>Action</th>
+						<th width=25%>Expression</th>
+						<th width=15%>Aggregate</th>
+						<th width=20%>Alias</th>
+						<th width=10%>Group</th>
+						<th width=10%>Sort</th>
+					</tr>
+				</tbody>
+			</table>
+		
+		
+		</div>
+		
+	
+		
+		
+	
+	
+	
+	
+	
+	</div>
+	
+	
+	<div  tabindex="-1" id="queryProps">
+	
+            <fieldset>
+                <legend>SELECT</legend>
+                <input type="radio" name="Select" value="0" checked="checked"><span>Default</span><br>
+                <input type="radio" name="Select" value="1"><span>DISTINCT</span><br>
+                <input type="radio" name="Select" value="3"><span>ALL</span><br>
+            </fieldset>
+            <fieldset>
+                <input type="checkbox" id="qpTop" > <span class="width40">TOP</span>
+                <input type="text" value="" id="qpTxtTop">
+                <input type="checkbox" id="qpPercent"> <span>PERCENT</span>
+                <input type="checkbox" id="qpWithTies"> <span>WITH TIES</span>
+            </fieldset>
+            <fieldset>
+                <input type="checkbox" value="1" name="Into"> <span class="width40">INTO</span>
+                <input type="text" value="" name="IntoText">
+            </fieldset>
+            <fieldset>
+                <span>GROUP BY</span> <input type="checkbox" value="1" name="GroupByAll"> <span>ALL</span>
+                <select name="GroupByWith">
+                    <option value="0">(none)</option>
+                    <option value="1">WITH CUBE</option>
+                    <option value="2">WITH ROLLUP</option>
+                </select>
+            </fieldset>
+            
+        </div>
+        
+        <div id="joinProps">
+			
+				<table class="format-table">
+					<tbody>
+					<tr>
+						<th width=150>
+							Left&nbsp;Table
+						</th>
+						<th>
+							Right&nbsp;Table
+						</th>
+					</tr>
+					<tr>
+						<td id="from_object" style="padding: 5px;background: #2489C5">
+							
+						</td>
+						<td id="to_object" style="padding: 5px; background: #2489C5">
+							
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding: 5px;background: whitesmoke; font-weight: bold;"> 
+							<span id="object_expression_input"  style="text-align: center">
+						</td>
+					</tr>
+					<tr>
+						
+							<td align=left style="padding-left: 30px">
+								
+								<input type="radio" value="0" name="dj" class="dialogJoin" id="inner">
+								<label for="Inner">Inner Join</label>
+							</td>
+							<td align=left>Only include rows where the join fields from both tables are equal.</td>
+					</tr>
+					<tr>
+							<td align=left style="padding-left: 30px">
+								<input type="radio" name="dj" class="dialogJoin" value="0" id="leftOuter">
+								<label for="leftOuter">Left Join</label>
+							</td>
+							<td align=left>Include ALL Records from <span class='dleftTable'></span> and only those from <span class='dRightTable'></span> where the join fields are equal.</td>
+					
+					</tr>
+					<tr>
+							<td align=left style="padding-left: 30px">
+								<input type="radio" name="dj" class="dialogJoin" value="0" id="rightOuter">
+								<label for="rightOuter">Right Join</label>
+							</td>
+						
+					<td align=left>Include ALL Records from <span class='dRightTable'></span> and only those from <span class='dleftTable'></span> where the join fields are equal.</td>
+						
+					</tr>
+					
+					
+					
+				</tbody>
+			</table>
+		</div>
+			
+		
+			
+
+
+</body>
+</HTML>
